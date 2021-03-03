@@ -24,7 +24,8 @@ RUN curl -sL \
   && cd openwhisk-runtime-go-*/main\
   && GO111MODULE=on go build -o /bin/proxy
 
-FROM pytorch/pytorch:1.4-cuda10.1-cudnn7-devel
+# Upgrade the version of PyTorch to 1.6.0
+FROM pytorch/pytorch:1.6.0-cuda10.1-cudnn7-devel
 # Install common modules for python
 RUN pip install \
     beautifulsoup4==4.6.3 \
@@ -37,6 +38,7 @@ RUN pip install \
     simplejson==3.16.0 \
     virtualenv==16.0.0 \
     twisted==18.7.0 \
+    pytorchcv==0.0.64 \
     minio==7.0.1  -i https://mirrors.aliyun.com/pypi/simple/ && \
     ln -sf /opt/conda/bin/python /usr/local/bin/python
 
